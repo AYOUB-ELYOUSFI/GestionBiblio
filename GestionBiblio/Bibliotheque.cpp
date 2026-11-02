@@ -1,4 +1,5 @@
 #include "Bibliotheque.h"
+#include "Livre.h"
 int biblio::Bibliotheque::nbBibliotheques = 0;
 
 biblio::Bibliotheque::Bibliotheque(string n, int c)
@@ -37,14 +38,14 @@ biblio::Bibliotheque::Bibliotheque(const Bibliotheque& b)
     nbBibliotheques++;
 }
 
-Bibliotheque& biblio::Bibliotheque::operator=(const Bibliotheque& b)
+biblio::Bibliotheque& biblio::Bibliotheque::operator=(const Bibliotheque& b)
 {
-    if (this != &b)
+    if (this != &b) // si this ne pointe pas vers l'adress de b (b=b)
     {
        
-        for (int i = 0; i < nbLivres; i++)
+        for (int i = 0; i < this->nbLivres; i++)
         {
-            delete livres[i];
+            delete this->livres[i];
         }
 
         delete[] livres;
@@ -75,7 +76,7 @@ Bibliotheque& biblio::Bibliotheque::operator=(const Bibliotheque& b)
     return*this;
 }
 
-Bibliotheque& biblio::Bibliotheque::operator+=(const Livre& L)
+biblio::Bibliotheque& biblio::Bibliotheque::operator+=(const Livre& L)
 {
     if (this->nbLivres < this->capacite)
     {
@@ -93,7 +94,7 @@ void biblio::Bibliotheque::rechercher(int id)
 {
     for (int i = 0; i < nbLivres; i++)
     {
-        if (this->livres[i]->id == id) // pour etre qccesible on fait protected
+        if (this->livres[i]->id == id) // pour etre qccesible on fait friend
         {
             cout << "Livre trouve :" << endl;
             this->livres[i]->afficher();
@@ -104,7 +105,7 @@ void biblio::Bibliotheque::rechercher(int id)
     cout << "Aucun livre avec cet identifiant." << endl;
 }
 
-void biblio::Bibliotheque::rechercher(string)
+void biblio::Bibliotheque::rechercher(string titre)
 {
     for (int i = 0; i < nbLivres; i++)
     {
@@ -122,7 +123,7 @@ void biblio::Bibliotheque::rechercher(string)
 
 
 
-Livre& biblio::Bibliotheque::ajouterLivre(const Livre& L)
+biblio::Livre& biblio::Bibliotheque::ajouterLivre(const Livre& L)
 {
     if (this->nbLivres < this->capacite) {
 
