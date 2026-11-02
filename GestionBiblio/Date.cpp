@@ -8,8 +8,10 @@ biblio::Date::Date(int j, int m, int a):jour(1),mois(1),annee(2000)
 		this->mois = m;
 		this->annee = a;
 	}
-	std::cerr << "Entrez une date valide svp";
-
+	else 
+	{
+	  std::cerr << "Entrez une date valide svp";
+	}
 }
 
 biblio::Date::Date()
