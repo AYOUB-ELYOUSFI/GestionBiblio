@@ -6,9 +6,9 @@ using namespace std;
 namespace biblio {
 	class Livre
 	{
-	protected:
+		friend class Bibliotheque;
+    private:
 		int const id;
-	private:
 		string titre, auteur;
 		int* notes;
 		int nbNotes;//taille
